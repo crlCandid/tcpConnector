@@ -3,7 +3,7 @@ from classes.client import Client
 
 host = input('Set Host: ')
 port = int(input('Set Port: '))  
-
+buffer = 4096
 clients = []
 
 def NewClient( socket, address):
@@ -33,9 +33,9 @@ while True:
 
     for client in clients:
         try:
-            data = client.Socket.recv(1024).decode()
+            data = client.Socket.recv(buffer).decode()
             if data:
-                print(f"Received from client {client.Address}: {data}")
+                print(f"Received from client {client.Address}:\n{data}")
                 continue
             
             if not data:

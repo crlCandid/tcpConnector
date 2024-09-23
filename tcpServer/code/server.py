@@ -35,7 +35,10 @@ while True:
         try:
             data = client.Socket.recv(buffer).decode()
             if data:
-                print(f"Received from client {client.Address}:\n{data}")
+                print(f"""Received from client {client.Address}:
+                ====================START OF MSG==================
+                {data}
+                ====================END OF MSG====================""")
                 continue
             
             if not data:

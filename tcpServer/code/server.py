@@ -1,11 +1,9 @@
 import socket
 from classes.client import Client
 
-# host = input('Set Host: ')
-# port = int(input('Set Port: '))  
+host = input('Set Host: ')
+port = int(input('Set Port: '))  
 
-host = '127.0.0.1'
-port = 9111
 clients = []
 
 def NewClient( socket, address):

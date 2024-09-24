@@ -2,14 +2,26 @@ import socket
 from classes.client import Client
 from datetime import datetime
 
-host = input('Set Host: ')
-port = int(input('Set Port: '))  
+# host = input('Set Host: ')
+# port = int(input('Set Port: '))  
+
+host = 'localhost'
+port = 3999
 buffer = 4096
 clients = []
 
 def NewClient( socket, address):
     clients.append(Client(address, socket))
     print(f"New Client: {address}")
+
+def MsgBuilder( data, client) -> str:
+    result = f"""
+====================START================
+At: {datetime.now()}
+====================MSG==================
+{data}
+====================END OF MSG==========="""
+    return result
 
 try:
     connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -36,13 +48,8 @@ while True:
         try:
             data = client.Socket.recv(buffer).decode()
             if data:
-                msg = f"""====================START OF MSG==================
-            Received from client {client.Address}
-            At: {datetime.now()}
-            ====================MSG==================
-            {data}
-            ====================END OF MSG==========="""
-                f = open("log.txt", "a")
+                f = open(f"log-{client.Address}.txt", "a")
+                msg = MsgBuilder(data, client)
                 f.write(msg + '\n')
                 f.close()
                 print(msg)

@@ -2,11 +2,8 @@ import socket
 from classes.client import Client
 from datetime import datetime
 
-# host = input('Set Host: ')
-# port = int(input('Set Port: '))  
-
-host = 'localhost'
-port = 3999
+host = input('Set Host: ')
+port = int(input('Set Port: '))  
 buffer = 4096
 clients = []
 

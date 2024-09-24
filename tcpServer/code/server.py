@@ -35,10 +35,14 @@ while True:
         try:
             data = client.Socket.recv(buffer).decode()
             if data:
-                print(f"""Received from client {client.Address}:
+                msg = f"""Received from client {client.Address}:
                 ====================START OF MSG==================
                 {data}
-                ====================END OF MSG====================""")
+                ====================END OF MSG===================="""
+                f = open("log.txt", "a")
+                f.write(msg)
+                f.close()
+                print(msg)
                 continue
             
             if not data:

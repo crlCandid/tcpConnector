@@ -1,5 +1,6 @@
 import socket
 from classes.client import Client
+from datetime import datetime
 
 host = input('Set Host: ')
 port = int(input('Set Port: '))  
@@ -35,12 +36,14 @@ while True:
         try:
             data = client.Socket.recv(buffer).decode()
             if data:
-                msg = f"""Received from client {client.Address}:
-                ====================START OF MSG==================
-                {data}
-                ====================END OF MSG===================="""
+                msg = f"""====================START OF MSG==================
+            Received from client {client.Address}
+            At: {datetime.now()}
+            ====================MSG==================
+            {data}
+            ====================END OF MSG==========="""
                 f = open("log.txt", "a")
-                f.write(msg)
+                f.write(msg + '\n')
                 f.close()
                 print(msg)
                 continue

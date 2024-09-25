@@ -11,13 +11,11 @@ def NewClient( socket, address):
     clients.append(Client(address, socket))
     print(f"New Client: {address}")
 
-def MsgBuilder( data, client) -> str:
+def MsgBuilder( data) -> str:
     result = f"""
-====================START================
-At: {datetime.now()}
-====================MSG==================
+MSG001==At: {datetime.now()}
 {data}
-====================END OF MSG==========="""
+END001=============================="""
     return result
 
 try:
@@ -46,7 +44,7 @@ while True:
             data = client.Socket.recv(buffer).decode()
             if data:
                 f = open(f"log-{client.Address}.txt", "a")
-                msg = MsgBuilder(data, client)
+                msg = MsgBuilder(data)
                 f.write(msg + '\n')
                 f.close()
                 print(msg)
